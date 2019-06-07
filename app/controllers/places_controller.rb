@@ -23,12 +23,20 @@ class PlacesController < ApplicationController
 
   def edit
     @place = Place.find(params[:id])
+
+    if @place.user != current_user
+      return render plain: 'NOT ALLOWED', status: :forbidden
+    end
   end
 
   def update
     @place = Place.find(params[:id])
+     if @place.user != current_user
+      return render plain: 'NOT ALLOWED', status: :forbidden
+    end
     @place.update_attributes(place_params)
     redirect_to root_path
+
   end
 
   def destroy
