@@ -6,6 +6,7 @@
   <br /> <br />
   <div class="row">
     <% @place.photos.each do |photo| %>
+      <%= image_tag photo.picture.url %>
       <%= photo.caption %>
     <% end %>
   </div>
@@ -52,6 +53,7 @@
 <div class="float-left">
   <%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
     <%= f.input :caption %>
+    <%= f.input :picture %>
     <%= f.submit "Add Pictures", class: 'btn btn-primary' %>
   <% end %>
 </div>
