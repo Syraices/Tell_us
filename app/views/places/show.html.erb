@@ -37,14 +37,47 @@
 
     <div id="map"></div>
   <% end %>
-
   <br />
 
+  <div class="clear">
+
   <div class="float-right">
+    <!-- Button trigger modal -->
+    <button type="button" class=" add-pics btn btn-primary float-right" data-toggle="modal" data-target="#myModalTwo">
+      Add Pictures
+    </button>
+
     <% if current_user && current_user == @place.user %>
-    <%= link_to 'Edit', edit_place_path(@place), class: 'btn btn-primary' %> 
-    <%= link_to 'Destroy', place_path(@place), method: :delete, data: {confirm: 'Are you sure you want to delete this?'}, class: 'btn btn-danger' %>
+      <%= link_to 'Edit', edit_place_path(@place), class: 'btn btn-primary' %> 
+      <%= link_to 'Destroy', place_path(@place), method: :delete, data: {confirm: 'Are you sure you want to delete this?'}, class: 'btn btn-danger' %>
     <% end %>
+  </div>
+  <!-- Modal -->
+<div class="modal fade" id="myModalTwo" tabindex="-1" role="dialog" aria-labelledby="myModalTwoLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">x</span>
+        </button>
+        <h4 class="modal-title" id="myModalTwo">Add Pictures</h4> 
+      </div>
+       <%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
+        <div class="modal-body">
+         <%= f.input :caption %>
+         <%= f.input :picture %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit "Add Pictures", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="clear"></div>
   </div>
 </div>
 <div class="clear"></div>
@@ -52,23 +85,20 @@
 <br />
 
 <div class="float-left">
-  <%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
-    <%= f.input :caption %>
-    <%= f.input :picture %>
-    <%= f.submit "Add Pictures", class: 'btn btn-primary' %>
-  <% end %>
+  
+
 </div>
 <div class="clear"></div>
+
+<!-- Button trigger modal -->
+    <button type="button" class=" add-pics btn btn-primary float-right" data-toggle="modal" data-target="#myModal">
+      Add A Comment
+    </button>
 
 <div class="col-10 offset-1">
   <h1 class="float-left">Comments</h1>
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary btn-lg float-right" data-toggle="modal" data-target="#myModal">
-    Add A Comment
-  </button>
-</div>
 
-<div class="clear"></div>
+  
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
